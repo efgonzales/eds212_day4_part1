@@ -1,0 +1,43 @@
+---
+title: "Leslie Matrix Example"
+author: "Elise Gonzales"
+format: html
+editor: visual
+---
+
+## Leslie Matrix Example
+
+Model population changes using the same example we did in lecture.
+
+```{r}
+
+insect_leslie <- matrix(c(0, 0, 600, 0.2, 0, 0, 0, 0.08, 0), 
+                        nrow = 3, 
+                        ncol = 3, 
+                        byrow = TRUE) #byrow populates the matrix by the row, instead of the default of column. Specify dimensions with ncol & ncol.
+
+insect_leslie #call matrix to have it print in knitted document. Or do this in console, so it doesn't print in document.
+```
+
+```{r}
+# Initial condition -- create vector "c()" of values, then multiply by matrix to get values at next stage.
+insect_y0 <- c(12000, 700, 500)
+class(insect_y0) #console says "numeric"; run this in console usually...
+
+```
+
+```{r}
+insect_y1 <- insect_leslie %*% insect_y0 #use dot product to do matrix multiplication
+
+insect_y1
+```
+
+Estimate populations at each life stage at year 2 and year 3.
+
+```{r}
+insect_y2 <- insect_leslie %*% insect_y1
+insect_y2
+
+insect_y3 <- insect_leslie %*% insect_y2
+insect_y3
+```
